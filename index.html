@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f5f2e9" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="icon" type="image/svg+xml" href="pccs-icon.svg" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="PCCS Memory" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>PCCS Color Memory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <a class="brand" href="#top"><span class="mark"></span>PCCS <b>MEMORY</b></a>
+    <nav><button class="nav active" data-view="quiz">クイズ</button><button class="nav" data-view="score">スコア</button><button class="nav" data-view="study">答えの図</button></nav>
+    <span class="progress-label" id="progressLabel">今日の正答 0</span>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="quizView">
+      <p class="eyebrow">PRACTICE / 01</p>
+      <h1>色を見て、<br><em>名前を引き出す。</em></h1>
+      <p class="intro">PCCSの色相環とトーンを、短い反復で覚えるクイズです。<br>正解した問題は少しずつ出にくくなります。</p>
+      <div class="mode-tabs" role="tablist">
+        <button class="mode selected" data-mode="hue">色相の対応を答える <small>24色</small></button>
+        <button class="mode" data-mode="tone">トーンを答える <small>15分類</small></button>
+      </div>
+    </section>
+
+    <section class="quiz-shell" id="quizShell">
+      <div class="quiz-meta"><span id="questionCount">QUESTION 01</span><span class="streak">✦ <b id="streak">0</b> 連続正解</span></div>
+      <div class="question">
+        <div class="swatch" id="swatch" aria-label="色見本"></div>
+        <div class="question-copy"><p class="prompt" id="prompt">この色相の名称は？</p><h2 id="hint">記号と色の印象を手がかりに選ぼう</h2></div>
+      </div>
+      <div class="answers" id="answers"></div>
+      <div class="feedback" id="feedback" aria-live="polite"></div>
+      <button class="next" id="next" disabled>次の問題 <span>→</span></button>
+    </section>
+
+    <section class="study" id="studyView" hidden>
+      <div class="study-heading"><p class="eyebrow">ANSWER MAP / PCCS</p><h1>答えの図で、<em>確かめる。</em></h1><p>クイズのあとに、番号・記号・名称・イメージ語をまとめて確認できます。</p></div>
+      <div class="study-tabs"><button class="study-tab selected" data-study="hues">色相環</button><button class="study-tab" data-study="tones">トーン</button></div>
+      <div class="cards" id="cards"></div>
+    </section>
+    <section class="score-view" id="scoreView" hidden>
+      <p class="eyebrow">YOUR PROGRESS</p><h1>今日の、<em>手ごたえ。</em></h1>
+      <div class="score-board"><div class="score-main"><span>正答率</span><strong id="accuracy">—</strong><small id="scoreMessage">まずは1問、答えてみよう。</small></div><div class="score-stat"><span>回答数</span><b id="answerTotal">0</b></div><div class="score-stat"><span>正答数</span><b id="correctTotal">0</b></div><div class="score-stat"><span>現在の連続正解</span><b id="scoreStreak">0</b></div></div>
+      <div class="breakdown"><article><p>色相</p><strong id="hueScore">0 / 0</strong><span>番号・記号・名称の対応</span></article><article><p>トーン</p><strong id="toneScore">0 / 0</strong><span>トーン名・イメージ語の対応</span></article></div>
+      <button class="reset-score" id="resetScore">スコアをリセット</button>
+    </section>
+  </main>
+  <footer>Based on PCCS hue &amp; tone classifications · 学習用ミニアプリ</footer>
+  <script src="app.js"></script>
+  <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('./service-worker.js');</script>
+</body>
+</html>
